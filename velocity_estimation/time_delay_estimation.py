@@ -357,16 +357,15 @@ class TDEDelegator:
 
         if ds.is_pixel_dead(p0[0], p0[1]) or ds.is_pixel_dead(p1[0], p1[1]):
             return None, None, None
-
-        match self.method:
-            case TDEMethod.CC:
-                return estimate_time_delay_ccf(x, y, dt, self.options, extra_debug_info)
-            case TDEMethod.CA:
-                return estimate_time_delay_ccond_av_max(
+            
+        if self.method == TDEMethod.CC:
+            return estimate_time_delay_ccf(x, y, dt, self.options, extra_debug_info)
+        if self.method == TDEMethod.CA:
+            return estimate_time_delay_ccond_av_max(
                     x, y, dt, self.options, extra_debug_info
                 )
-            case TDEMethod.CCFit:
-                return estimate_time_delay_ccf_fit(
+        if self.method == TDEMethod.CCFit:
+            return estimate_time_delay_ccf_fit(
                     x, y, dt, self.options, extra_debug_info
                 )
 
