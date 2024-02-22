@@ -86,13 +86,12 @@ class EstimationOptions:
         self.ccf_options = ccf_options
 
     def get_time_delay_options(self):
-        match self.method:
-            case tde.TDEMethod.CC:
-                return self.cc_options
-            case tde.TDEMethod.CA:
-                return self.ca_options
-            case tde.TDEMethod.CCFit:
-                return self.ccf_options
+        if self.method == tde.TDEMethod.CC:
+            return self.cc_options
+        if self.method == tde.TDEMethod.CA:
+            return self.ca_options
+        if self.method == tde.TDEMethod.CCFit:
+            return self.ccf_options
 
     def __str__(self):
         """Return a string representation of the EstimationOptions object."""
